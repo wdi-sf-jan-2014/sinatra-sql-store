@@ -19,3 +19,23 @@
   </p>
 </form>
 
+Product Categories:
+<p>
+Remove <%= @product["name"] %> from a category:
+<% @member_categories.each do |cm| %>
+  <form action="category_memberships/<%= cm["cm_id"] %>/destroy" method="post">
+    <input type="submit" value="Remove <%= @product["name"] %> from <%= cm["cat_name"]%>">
+  </form>
+<% end %>
+</p>
+
+Add <%= @product["name"] %> to another category:
+<form action="/category_memberships" method="post">
+  <select name="category_id">
+    <% @non_member_categories.each do |category| %>
+      <option value="<%= category["id"] %>"><%= category["name"] %></option> 
+    <% end %>
+  </select>
+  <input name="product_id" type="hidden" value="<%=@product["id"]%>">
+  <input type="submit">
+</form>

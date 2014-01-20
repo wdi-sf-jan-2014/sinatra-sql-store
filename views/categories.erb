@@ -1,0 +1,7 @@
+<ul>
+  <% @categories.each do |category| %>
+    <li> <a href="categories/<%=category["id"]%>"> View <%= category["name"]%></a></li>
+  <% end %>
+</ul>
+
+<a href="categories/new"> Create a new category.</a>
