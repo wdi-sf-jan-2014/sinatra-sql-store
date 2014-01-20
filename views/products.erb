@@ -1,0 +1,7 @@
+<ul>
+  <% @products.each do |product| %>
+    <li> <a href="products/<%=product["id"]%>"> View <%= product["name"]%></a></li>
+  <% end %>
+</ul>
+
+<a href="products/new"> Create a new product.</a>
