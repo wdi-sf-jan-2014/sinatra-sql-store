@@ -19,6 +19,8 @@ end
 # Get the index of products
 get '/products' do
   c = PGconn.new(:host => "localhost", :dbname => dbname)
+
+  # Get all rows from the products table.
   @products = c.exec_params("SELECT * FROM products;")
   c.close
   erb :products
@@ -32,6 +34,8 @@ end
 # POST to create a new product
 post '/products' do
   c = PGconn.new(:host => "localhost", :dbname => dbname)
+
+  # Insert the new row into the products table.
   c.exec_params("INSERT INTO products (name, price, description) VALUES ($1,$2,$3)",
                   [params["name"], params["price"], params["description"]])
 
@@ -45,7 +49,8 @@ end
 # Update a product
 post '/products/:id' do
   c = PGconn.new(:host => "localhost", :dbname => dbname)
-  product = c.exec_params("SELECT * FROM products WHERE products.id = $1", [params["id"]])
+
+  # Update the product.
   c.exec_params("UPDATE products SET (name, price, description) = ($2, $3, $4) WHERE products.id = $1 ",
                 [params["id"], params["name"], params["price"], params["description"]])
   c.close
